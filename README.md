@@ -2,8 +2,8 @@
 Hardware support for immediate memory reclamation in optimistic data structures, implemented as four custom RISC-V instructions on the CVA6 core.
 
 **Status:** 🔧 in progress
-**Maintainers:** @AceAryan
-**Started:** <August 2026>
+**Maintainers:** [@AceAryan](https://github.com/AceAryan)
+**Started:** August 2026
 
 ## Why
 Concurrent data structures can read memory that another thread has just freed (use-after-free). Existing fixes (hazard pointers, RCU/QSBR, hardware transactional memory) cost per-read overhead, delay reclamation, or are being disabled on modern CPUs. We implement the Conditional Access primitives from *Efficient Hardware Primitives for Immediate Memory Reclamation in Optimistic Data Structures* (Singh, Brown, Spear), which reuse the cache coherence invalidation that already exists to warn a reader when a line it depends on has changed.
