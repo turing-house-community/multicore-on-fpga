@@ -2,6 +2,9 @@
 Newest entries at the top. One or two lines each: what was tried, what worked, what broke, and why decisions were made.
 Tag event entries with [LAUNCH], [MIDPOINT], or [COMPLETION].
 
+## 2026-11-13
+- [COMPLETION] Final presentation at Turing House. Poster in docs/talks/poster.pdf.
+
 ## 2026-11-08
 - Project moved into this repository: CVA6 fork as a submodule, step-by-step docs, prebuilt bitstream, raw results. Testbench file lists, negative controls and run scripts moved from personal folders into the fork.
 
