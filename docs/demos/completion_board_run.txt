@@ -1,0 +1,17 @@
+# Sample output of the KR260 runs (completion)
+
+$ KR260_PROGRAM=1 corev_apu/fpga/kr260/kr260_run.sh build/board/ca_2core.elf 30
+LOADED 4872 bytes
+RESULT PASS after 21 ms
+
+$ corev_apu/fpga/kr260/kr260_run.sh build/board/msi_2core.elf 30
+LOADED 4800 bytes
+RESULT PASS after 31 ms
+
+$ corev_apu/fpga/kr260/kr260_run.sh build/board/controls/plain_reads.elf 30    # expected to fail
+RESULT FAIL code 30 (tohost=61) after 3 ms
+
+$ corev_apu/fpga/kr260/kr260_run.sh build/bench/micro_coh.elf 60
+LOADED 24720 bytes
+RESULT PASS after 18 ms
+MBOX 1371668482 1 5375 2 9692 3 5040 4 4952 5 15062 6 650 34436 0 ...
