@@ -7,7 +7,7 @@ A dual-core, cache-coherent RISC-V processor (CVA6) with the Conditional Access 
 
 Team: Aryan Kumar, Nishant Dhankhar, Kudumula Vinod Kumar Reddy. Advisor: Prof. Ajay Singh, Department of Computer Science and Engineering, IIT Gandhinagar.
 
-![poster](docs/demos/completion.png)
+![poster](docs/demos/completion_poster.png)
 
 ## Why
 In lock-free data structures, a thread can read a node that another thread has just freed: a **use-after-free**. Software fixes (hazard pointers, epoch-based reclamation) either slow every read or delay freeing memory. **Conditional Access** (Singh, Brown, Spear, [arXiv 2302.12958](https://arxiv.org/abs/2302.12958)) reuses the cache-coherence protocol, which already notices when another core writes a line you have read, to warn the reader. Nodes can then be freed **immediately**. The paper evaluated it only in a simulator; we built it in real hardware. [More background](docs/01_background.md).

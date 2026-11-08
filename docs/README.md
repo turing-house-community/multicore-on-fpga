@@ -22,6 +22,6 @@ Read in this order. Each guide ends with a link to the next.
 
 Other material:
 - `talks/poster.pdf`: the final poster; its LaTeX source is in `talks/poster/`
-- `demos/completion.png`, `demos/completion_board_run.txt`: poster preview and sample board output
+- `demos/completion_poster.png`, `demos/completion_board_run.txt`: poster preview and sample board output
 - `figures/`: figures used by these docs
 - The fork carries shorter design notes too: `../cva6/docs/msi_ca_kr260/`
