@@ -1,8 +1,8 @@
 # Read by the Turing House dashboard. Keep it up to date.
-name: <Project Name>
-status: proposed   # proposed | launched | in-progress | mid-review | completed | paused | archived
-maintainers: [handle1, handle2]
-repo: https://github.com/turing-house-iitgn/<repo-name>
+name: Implementing Conditional Access on FPGA
+status: completed   # proposed | launched | in-progress | mid-review | completed | paused | archived
+maintainers: [AceAryan]
+repo: https://github.com/turing-house-community/multicore-on-fpga
 
 phases:
   launch:
@@ -15,5 +15,5 @@ phases:
     insta: null
   completion:
     date: null
-    slides: null
+    slides: docs/talks/poster.pdf
     insta: null

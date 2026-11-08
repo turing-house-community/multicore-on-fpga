@@ -98,6 +98,7 @@ done | tee isa_results.txt | grep -v SUCCESS
 | `verif/tests/custom/ca_2core/ca_2core.S` | all four CA instructions, CSR 0xCC0, revocation by trap, a reader using `cread` while the other core frees and reuses nodes, and the paper's `cread`/`cwrite` try-lock |
 
 ```bash
+mkdir -p build
 for p in msi_2core ca_2core; do
   riscv64-unknown-elf-gcc -march=rv32ima_zicsr -mabi=ilp32 -nostdlib -nostartfiles \
     -T verif/tests/custom/$p/link.ld verif/tests/custom/$p/$p.S -o build/$p.elf
