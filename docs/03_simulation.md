@@ -9,7 +9,7 @@ Every result in this project was first checked in simulation. This page reproduc
 | 3. Full processor | 1 or 2 complete CVA6 cores running RISC-V programs | ~10 min each | Verilator 5.008, Spike |
 | 4. Exact FPGA design | the KR260 top level, with a stand-in for the ARM side | ~10 min | Verilator 5.032 |
 
-Build outputs go to `build/` (not tracked by git).
+Build outputs go to `build/` (not tracked by git). Create it once: `mkdir -p build`.
 
 ---
 
@@ -21,11 +21,11 @@ verilator --binary --timing -j 8 -Wno-fatal -Wno-lint -Wno-style -Wno-UNOPTFLAT 
   --top-module std_nbdcache_msi_tb -Mdir build/tb1 -f core/cache_subsystem/test/std_nbdcache_msi_tb.f
 build/tb1/Vstd_nbdcache_msi_tb +seed=1 +nrandom=4000
 ```
-**Expected:** the run ends with `PASSED`.
+**Expected:** `PASSED`, followed by Verilator's simulation report.
 
 | Option | Effect |
 |---|---|
-| `+seed=N` | a different random sequence; try many: `for s in $(seq 1 20); do build/tb1/Vstd_nbdcache_msi_tb +seed=$s +nrandom=4000 \| tail -1; done` |
+| `+seed=N` | a different random sequence; try many: `for s in $(seq 1 20); do build/tb1/Vstd_nbdcache_msi_tb +seed=$s +nrandom=4000 \| grep -a -E 'PASSED\|FAILED'; done` |
 | `+nrandom=N` | number of random operations |
 | `+debug` | per-cycle trace of the cache state machines |
 | `+axidebug` | every AXI beat to memory |
@@ -47,7 +47,7 @@ verilator --binary --timing -j 8 -Wno-fatal -Wno-lint -Wno-style -Wno-UNOPTFLAT 
 build/tb2/Vstd_nbdcache_2core_tb +seed=1 +nrandom=1500
 build/tb2/Vstd_nbdcache_2core_tb +seed=1 +nrandom=1500 +hot     # both cores fight over 2 lines
 ```
-**Expected:** each run ends with a coverage line and `PASSED`, for example
+**Expected:** each run prints a coverage line and `PASSED` (then Verilator's report), for example
 ```
 coverage: AXI line writes=1127 reads=1777, SWMR checks=3072550, max times passed over=1
 PASSED
@@ -56,7 +56,7 @@ We ran 200 seeds × {normal, `+hot`} = 400 runs, all passing:
 ```bash
 for s in $(seq 1 200); do
   for m in "" "+hot"; do
-    r=$(build/tb2/Vstd_nbdcache_2core_tb +seed=$s +nrandom=1500 $m | tail -1); echo "$s $m $r"
+    r=$(build/tb2/Vstd_nbdcache_2core_tb +seed=$s +nrandom=1500 $m | grep -a -E -o 'PASSED|FAILED.*'); echo "$s $m $r"
   done
 done | grep -v PASSED          # prints nothing if all pass
 ```
@@ -130,7 +130,7 @@ verilator --binary --timing -j 8 -O2 -Wno-fatal -Wno-lint -Wno-style -Wno-UNOPTF
   +incdir+vendor/pulp-platform/axi/include +incdir+common/local/util \
   +incdir+core/cache_subsystem/hpdcache/rtl/src/utils/ecc +incdir+core/cache_subsystem/hpdcache/rtl/include \
   $K/sim/kr260_bd_wrapper_sim.sv -f build/kr260.f
-$K/sw/build_tests.sh build/board                                  # programs linked for the board
+$K/sw/build_tests.sh build/board     # programs linked for the board (ISA tests only if riscv-tests is installed)
 riscv64-unknown-elf-objcopy -O binary -R .tohost build/board/ca_2core.elf build/ca_2core.bin
 build/kr260/Vcva6_kr260_top +bin=build/ca_2core.bin
 ```

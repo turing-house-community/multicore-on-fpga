@@ -41,9 +41,10 @@ cd multicore-on-fpga/cva6
 # 2. Install the tools: RISC-V GCC, Verilator, Spike (once; see docs/00_getting_started.md)
 
 # 3. Two caches + coherence bus + CA units, random traffic against reference models (~2 min)
+mkdir -p build
 verilator --binary --timing -j 8 -Wno-fatal -Wno-lint -Wno-style -Wno-UNOPTFLAT \
   --top-module std_nbdcache_2core_tb -Mdir build/tb2 -f core/cache_subsystem/test/std_nbdcache_2core_tb.f
-build/tb2/Vstd_nbdcache_2core_tb +seed=1 +nrandom=1500          # ends with PASSED
+build/tb2/Vstd_nbdcache_2core_tb +seed=1 +nrandom=1500          # prints PASSED
 
 # 4. Two complete cores running the CA test program (~10 min build)
 make verilate target=cv32a6_imac_sv32_wb defines=CVA6_2CORE ver-library=work-ver-2core

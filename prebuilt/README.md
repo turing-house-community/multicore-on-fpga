@@ -10,7 +10,7 @@ Use these files to run programs on an AMD KR260 **without building the FPGA desi
 | `reports/impl_utilization_hier.rpt` | the same, per module (e.g. `ca_tag_set`, `cc_bus`) |
 | `reports/impl_timing_summary.rpt` | timing: WNS +2.390 ns at 50 MHz, so timing is met |
 
-**Built from:** the `cva6` submodule at the commit this repository pins (`9fbb45bc`, branch `ca-snoop`). All 230 RTL files Vivado used were compared with that commit and are identical. Vivado 2023.2, part `xck26-sfvc784-2LV-c`, board `kr260_som:part0:1.1`, built 2026-11-01.
+**Built from:** the `cva6` submodule at the commit this repository pins (`11ed1527`, branch `ca-snoop`). All 230 RTL files Vivado used were compared with that commit and are identical. Vivado 2023.2, part `xck26-sfvc784-2LV-c`, board `kr260_som:part0:1.1`, built 2026-11-01.
 
 | sha256 | file |
 |---|---|

@@ -139,11 +139,12 @@ Do **not** put Verilator 5.008 first in `PATH` globally. The full-core `make` fi
 
 This builds and runs the two-cache testbench: two MSI caches, the coherence bus and the conditional-access unit, driven by random traffic and checked against a reference model.
 ```bash
+mkdir -p build                    # Verilator needs the parent folder to exist
 verilator --binary --timing -j 8 -Wno-fatal -Wno-lint -Wno-style -Wno-UNOPTFLAT \
   --top-module std_nbdcache_2core_tb -Mdir build/tb2 -f core/cache_subsystem/test/std_nbdcache_2core_tb.f
 build/tb2/Vstd_nbdcache_2core_tb +seed=1 +nrandom=1500
 ```
-The last lines should say `PASSED`. If they do, your setup works. Continue with [the simulation guide](03_simulation.md).
+It prints `PASSED`, followed by Verilator's short simulation report. If it does, your setup works. Continue with [the simulation guide](03_simulation.md).
 
 ## Optional: Vivado and the board
 
