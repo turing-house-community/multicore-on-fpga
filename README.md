@@ -1,36 +1,16 @@
 # Implementing Conditional Access on FPGA
-A dual-core, cache-coherent RISC-V processor (CVA6) with the **Conditional Access** instructions for immediate memory reclamation, running on an AMD KR260 FPGA.
+A dual-core, cache-coherent RISC-V processor (CVA6) with the Conditional Access instructions for immediate memory reclamation, running on an AMD KR260 FPGA.
 
-**Status:** ✅ completed (November 2026). Open follow-up tasks are in [PLAN.md](PLAN.md).
-**Team:** Aryan Kumar ([@AceAryan](https://github.com/AceAryan)), Nishant Dhankhar, Kudumula Vinod Kumar Reddy
-**Advisor:** Prof. Ajay Singh, Department of Computer Science and Engineering, IIT Gandhinagar
+**Status:** ✅ completed
+**Maintainers:** @AceAryan
 **Started:** August 2026
+
+Team: Aryan Kumar, Nishant Dhankhar, Kudumula Vinod Kumar Reddy. Advisor: Prof. Ajay Singh, Department of Computer Science and Engineering, IIT Gandhinagar.
 
 ![poster](docs/demos/completion.png)
 
 ## Why
 In lock-free data structures, a thread can read a node that another thread has just freed: a **use-after-free**. Software fixes (hazard pointers, epoch-based reclamation) either slow every read or delay freeing memory. **Conditional Access** (Singh, Brown, Spear, [arXiv 2302.12958](https://arxiv.org/abs/2302.12958)) reuses the cache-coherence protocol, which already notices when another core writes a line you have read, to warn the reader. Nodes can then be freed **immediately**. The paper evaluated it only in a simulator; we built it in real hardware. [More background](docs/01_background.md).
-
-## What we built
-Starting from the open-source single-core [CVA6](https://github.com/openhwgroup/cva6) RISC-V processor (32-bit, RV32IMAC):
-1. **A second core** with its own private L1 data cache.
-2. **MSI cache coherence** between the two write-back caches, over a small snooping bus.
-3. **The four CA instructions** in the pipeline: `cread`, `cwrite`, `untagOne`, `untagAll`, with a failure flag in CSR 0xCC0.
-4. **The system on an AMD KR260**: both cores at 50 MHz using the board's DDR, programs loaded over JTAG.
-
-Then we verified it (randomized testbenches, injected bugs, ISA tests, on-board tests) and ran the paper's benchmarks on the board. [How the hardware works](docs/02_design.md).
-
-## Key results
-| | |
-|---|---|
-| **Memory** | CA frees every removed node immediately: **0** unfreed nodes, vs. 100–200 for epochs and 1,500–3,000 for never freeing |
-| **Throughput** | fastest scheme under high contention: **1.33×** the never-freeing baseline on a stack (hazard pointers 1.09×, epochs 1.05×); slower on read-heavy work because the failure check is a CSR read |
-| **Latency** | `cread` 2 cycles (plain load 1); `cread` + failure check 7; `cread` + `cwrite` 17 (`amoswap` 14) |
-| **Coherence cost** | plain miss 54 cycles, miss to a line the other core holds dirty 97, invalidating a clean copy ~1 |
-| **Area** | CA unit ~1,100 LUTs per core (4.5% of a core), no block RAM; coherence bus 48 LUTs |
-| **Correctness** | 1,100/1,100 randomized simulations, 26/27 injected bugs caught, 72/73 ISA tests, 288/288 benchmark runs valid; board = simulation |
-
-Details: [docs/06_results.md](docs/06_results.md).
 
 ## Quickstart
 ```bash
@@ -59,6 +39,43 @@ KR260_PROGRAM=1 corev_apu/fpga/kr260/kr260_run.sh build/board/ca_2core.elf 30   
 ```
 Keep the repository inside the Linux/WSL file system (not `/mnt/c/...`), or builds get very slow.
 
+## Where we are
+**What works:** everything we set out to build.
+
+Starting from the open-source single-core [CVA6](https://github.com/openhwgroup/cva6) RISC-V processor (32-bit, RV32IMAC):
+1. **A second core** with its own private L1 data cache.
+2. **MSI cache coherence** between the two write-back caches, over a small snooping bus.
+3. **The four CA instructions** in the pipeline: `cread`, `cwrite`, `untagOne`, `untagAll`, with a failure flag in CSR 0xCC0.
+4. **The system on an AMD KR260**: both cores at 50 MHz using the board's DDR, programs loaded over JTAG.
+
+Then we verified it (randomized testbenches, injected bugs, ISA tests, on-board tests) and ran the paper's benchmarks on the board. [How the hardware works](docs/02_design.md).
+
+| | |
+|---|---|
+| **Memory** | CA frees every removed node immediately: **0** unfreed nodes, vs. 100–200 for epochs and 1,500–3,000 for never freeing |
+| **Throughput** | fastest scheme under high contention: **1.33×** the never-freeing baseline on a stack (hazard pointers 1.09×, epochs 1.05×); slower on read-heavy work because the failure check is a CSR read |
+| **Latency** | `cread` 2 cycles (plain load 1); `cread` + failure check 7; `cread` + `cwrite` 17 (`amoswap` 14) |
+| **Coherence cost** | plain miss 54 cycles, miss to a line the other core holds dirty 97, invalidating a clean copy ~1 |
+| **Area** | CA unit ~1,100 LUTs per core (4.5% of a core), no block RAM; coherence bus 48 LUTs |
+| **Correctness** | 1,100/1,100 randomized simulations, 26/27 injected bugs caught, 72/73 ISA tests, 288/288 benchmark runs valid; board = simulation |
+
+Details: [docs/06_results.md](docs/06_results.md).
+
+**What's next:** the 🙋 ideas in [PLAN.md](PLAN.md#stretch--ideas); the most valuable is a branch-on-CA-failure instruction, which would remove most of CA's read-side cost.
+
+**Open questions:** whether CA state should survive interrupts and context switches, and snooping vs. directory for 4+ cores. Details live in [PLAN.md](PLAN.md).
+
+## How to join
+1. Read this README, then skim [LOG.md](LOG.md) to see how we got here.
+2. Pick a task marked 🙋 in [PLAN.md](PLAN.md) (or ask a maintainer). To get set up, do [getting started](docs/00_getting_started.md) and the first two levels of [the simulation guide](docs/03_simulation.md).
+3. Ping us on [Discord](https://discord.com/channels/1552005581009846404/1561748566366617630).
+
+## Resources
+- Singh, Brown, Spear: *Efficient Hardware Primitives for Immediate Memory Reclamation in Optimistic Data Structures*, [arXiv 2302.12958](https://arxiv.org/abs/2302.12958)
+- [CVA6](https://github.com/openhwgroup/cva6) and its [user manual](https://docs.openhwgroup.org/projects/cva6-user-manual/)
+- Nagarajan, Sorin, Hill, Wood: *A Primer on Memory Consistency and Cache Coherence* (2nd ed.)
+- [AMD Kria KR260 Robotics Starter Kit](https://www.amd.com/en/products/system-on-modules/kria/k26/kr260-robotics-starter-kit.html)
+
 ## Guides
 | # | Guide | You will |
 |---|---|---|
@@ -82,18 +99,6 @@ Keep the repository inside the Linux/WSL file system (not `/mnt/c/...`), or buil
 | `PLAN.md` | what was done, and open tasks for newcomers (🙋) |
 | `LOG.md` | how we got here: what was tried, what broke, why decisions were made |
 | `project.yml` | metadata for the Turing House dashboard |
-
-## How to join
-1. Read this README, then skim [LOG.md](LOG.md) to see how we got here.
-2. Do [getting started](docs/00_getting_started.md) and the first two levels of [the simulation guide](docs/03_simulation.md).
-3. Pick a task marked 🙋 in [PLAN.md](PLAN.md) (or ask a maintainer).
-4. Ping us: open an issue in this repository, or contact [@AceAryan](https://github.com/AceAryan).
-
-## Resources
-- Singh, Brown, Spear: *Efficient Hardware Primitives for Immediate Memory Reclamation in Optimistic Data Structures*, [arXiv 2302.12958](https://arxiv.org/abs/2302.12958)
-- [CVA6](https://github.com/openhwgroup/cva6) and its [user manual](https://docs.openhwgroup.org/projects/cva6-user-manual/)
-- Nagarajan, Sorin, Hill, Wood: *A Primer on Memory Consistency and Cache Coherence* (2nd ed.)
-- [AMD Kria KR260 Robotics Starter Kit](https://www.amd.com/en/products/system-on-modules/kria/k26/kr260-robotics-starter-kit.html)
 
 ## Acknowledgements
 We thank Prof. Ajay Singh for his guidance throughout this project, and the Department of Computer Science and Engineering, IIT Gandhinagar, for access to the AMD KR260 board and tools.

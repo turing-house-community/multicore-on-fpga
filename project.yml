@@ -6,11 +6,11 @@ repo: https://github.com/turing-house-community/multicore-on-fpga
 
 phases:
   launch:
-    date: null     # YYYY-MM-DD
+    date: 2026-08-13     # YYYY-MM-DD
     slides: null   # e.g. docs/talks/launch.pdf
     insta: null    # link to Instagram post
   midpoint:
-    date: null
+    date: 2026-10-20
     slides: null
     insta: null
   completion:

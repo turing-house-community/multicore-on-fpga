@@ -32,6 +32,7 @@ Tag event entries with [LAUNCH], [MIDPOINT], or [COMPLETION].
 - Decided on the write-back cache: the write-through cache cannot hold lines in M, which MSI and CA need.
 
 ## 2026-10-20
+- [MIDPOINT] Midpoint review. CA instructions run through the CVA6 pipeline on one core; next: multicore.
 - CA tag-set module (8 entries, commit-time updates) on the write-through cache, with unit testbenches.
 
 ## 2026-10-14
@@ -44,4 +45,7 @@ Tag event entries with [LAUNCH], [MIDPOINT], or [COMPLETION].
 - The four CA instructions run through the full CVA6 pipeline (single core, 64-bit, write-through cache, Verilator).
 
 ## 2026-08-26
-- Started: first CA hardware primitives added to CVA6.
+- First CA hardware primitives added to CVA6.
+
+## 2026-08-13
+- [LAUNCH] Kickoff at Turing House: implement Conditional Access in real hardware.
