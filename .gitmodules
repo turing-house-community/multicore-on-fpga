@@ -1,0 +1,4 @@
+[submodule "cva6"]
+	path = cva6
+	url = https://github.com/AceAryan/cva6.git
+	branch = ca-snoop
