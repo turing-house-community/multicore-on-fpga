@@ -16,7 +16,7 @@ The benchmark numbers in the figures and tables are typed in by hand from [`resu
   ```bash
   cd docs/talks/poster && pdflatex poster.tex
   ```
-- **Logo:** put `logo.png` next to `poster.tex`; without it a `[LOGO]` box is shown.
+- **Logo:** `logo.png` (IIT Gandhinagar) sits next to `poster.tex`; without it a `[LOGO]` box is shown.
 - **SVG → PNG:** open the SVG in Chrome/Edge at its own size and render at 3×, e.g.
   `chrome --headless --screenshot=uaf_steps.png --window-size=1400,440 --force-device-scale-factor=3 uaf_steps.svg`.
 
