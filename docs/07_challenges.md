@@ -58,3 +58,7 @@ We had to learn, at the same time:
 4. Run [the two-cache testbench](03_simulation.md#2-two-caches-the-msi--ca-testbench) with `+catrace` and follow a few CA operations in the trace.
 5. Break something on purpose (e.g. make a GetM snoop not revoke CA access in `ca_tag_set.sv`) and watch the testbench catch it.
 6. Then the board: [04_fpga_kr260.md](04_fpga_kr260.md).
+
+---
+
+**Next:** [the project in depth](08_in_depth.md), with answers to the questions reviewers ask.

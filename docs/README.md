@@ -18,6 +18,7 @@ Read in this order. Each guide ends with a link to the next.
 - [05_benchmarks.md](05_benchmarks.md) — rerun the paper's benchmarks and the micro-benchmarks on the board
 - [06_results.md](06_results.md) — what we measured: correctness, memory, throughput, latency, coherence cost, area
 - [07_challenges.md](07_challenges.md) — what was hard, what we decided and why, and a learning path
+- [08_in_depth.md](08_in_depth.md) — the full technical explanation, with answers to the questions reviewers ask
 - [code_map.md](code_map.md) — every file we changed in CVA6, and why
 
 Other material:
