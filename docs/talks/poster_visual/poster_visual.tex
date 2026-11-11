@@ -1,0 +1,135 @@
+%----------------------------------------------------------------------------------------
+%  A1 portrait poster, visual version: Implementing Conditional Access on FPGA
+%  Diagram-first, large type. Compile with pdfLaTeX (Overleaf); figures in figures/,
+%  logo.png next to this file. Figures are drawn by figures/make_figs_visual.py
+%  (new diagrams) and ../poster/figures/make_figs.py (uaf_steps).
+%  If it spills onto page 2, lower \figscale.
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+\usepackage[paperwidth=594mm,paperheight=841mm,margin=10mm]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}   % Times
+\usepackage{anyfontsize}
+
+\usepackage[dvipsnames]{xcolor}
+\definecolor{navy}{HTML}{1F3A5F}
+\definecolor{rulegray}{HTML}{B5B5B5}
+
+\usepackage{multicol}
+\setlength{\columnsep}{12mm}
+\setlength{\columnseprule}{0.6pt}
+\renewcommand{\columnseprulecolor}{\color{rulegray}}
+
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% Type scale: large, for reading from a distance
+\newcommand{\bodysize}{\fontsize{24}{30}\selectfont}
+\newcommand{\headsize}{\fontsize{42}{48}\selectfont}
+
+\newcommand{\figscale}{1.0}
+
+\newcounter{psec}
+\newcommand{\psection}[1]{%
+  \par\vspace{8pt}\stepcounter{psec}%
+  {\headsize\bfseries\color{navy}\thepsec\hspace{0.45em}#1\par}%
+  \vspace{-4pt}{\color{navy}\rule{\columnwidth}{1.6pt}}\par\vspace{2pt}}
+
+% a figure without a caption number: #1 width, #2 file
+\newcommand{\fig}[2][1.0]{\par\vspace{3pt}{\centering\includegraphics[width=#1\linewidth]{#2}\par}\vspace{3pt}}
+
+\begin{document}
+\bodysize
+
+%----------------------------------------------------------------------------------------
+%  HEADER
+%----------------------------------------------------------------------------------------
+\noindent
+\begin{minipage}[c]{0.12\linewidth}
+  \IfFileExists{logo.png}{\def\haslogo{1}}{\IfFileExists{figures/logo.png}{\def\haslogo{1}}{}}%
+  \ifdefined\haslogo
+    \includegraphics[width=\linewidth,height=66mm,keepaspectratio]{logo.png}%
+  \else
+    \fbox{\parbox[c][60mm][c]{0.9\linewidth}{\centering [LOGO]}}%
+  \fi
+\end{minipage}%
+\begin{minipage}[c]{0.76\linewidth}\centering
+  {\fontsize{64}{72}\selectfont\bfseries\color{navy} Implementing Conditional Access on FPGA\par}
+  \vspace{4mm}
+  {\fontsize{30}{36}\selectfont A dual-core, cache-coherent RISC-V processor that frees memory immediately\par}
+  \vspace{3mm}
+  {\fontsize{30}{36}\selectfont Aryan Kumar, Nishant Dhankhar, Kudumula Vinod Kumar Reddy\qquad\textit{Advisor:} Ajay Singh\par}
+  \vspace{3mm}
+  {\fontsize{26}{32}\selectfont\itshape Department of Computer Science and Engineering, IIT Gandhinagar\par}
+\end{minipage}%
+\begin{minipage}[c]{0.12\linewidth}\hfill\end{minipage}
+
+\vspace{3mm}
+{\color{navy}\rule{\linewidth}{2.5pt}}
+\vspace{1mm}
+
+\begin{multicols}{2}
+\bodysize
+
+%----------------------------------------------------------------------------------------
+\psection{The problem: use-after-free}
+Lock-free data structures let threads read nodes that other threads are removing.
+\fig[\figscale]{uaf_steps.png}
+
+%----------------------------------------------------------------------------------------
+\psection{Today's fixes delay freeing}
+\fig[\figscale]{approaches.png}
+
+%----------------------------------------------------------------------------------------
+\psection{Conditional Access (CA)}
+New instructions~[1] that reuse the cache-coherence protocol: a write by another core
+\textbf{revokes} the reader's access, so memory can be freed \textbf{immediately}.
+\fig[\figscale]{instructions.png}
+\fig[\figscale]{revoke_flow.png}
+
+%----------------------------------------------------------------------------------------
+\psection{Why build it on an FPGA?}
+CA was only simulated. Real hardware answers what a simulator cannot:
+the \textbf{latency} of the instructions, the \textbf{cost of the coherence events} CA relies on,
+and the \textbf{area} it needs. Measured on the KR260:
+\fig[\figscale]{measured.png}
+
+\columnbreak
+
+%----------------------------------------------------------------------------------------
+\psection{What we built on CVA6~[2]}
+\fig[0.76]{architecture_big.png}
+
+%----------------------------------------------------------------------------------------
+\psection{Challenges}
+\fig[0.84]{challenges.png}
+
+%----------------------------------------------------------------------------------------
+\psection{Verification}
+\fig[0.84]{verification.png}
+
+%----------------------------------------------------------------------------------------
+\psection{Results on the board}
+\fig[0.9]{headline.png}
+\fig[0.68]{throughput_big.png}
+
+%----------------------------------------------------------------------------------------
+\psection{Conclusion}
+CA works on real hardware: immediate freeing, fastest under contention, 4.5\% of a core.
+\textbf{Next:} a branch-on-failure instruction.
+
+{\fontsize{15}{18.5}\selectfont
+[1] A.~Singh, T.~Brown, M.~Spear. Efficient hardware primitives for immediate memory reclamation
+in optimistic data structures. arXiv:2302.12958, 2023.
+[2] F.~Zaruba, L.~Benini. The cost of application-class processing. \emph{IEEE TVLSI}, 2019.\par
+\textbf{Acknowledgements.} We thank Prof.\ Ajay Singh for his guidance throughout this project, and the
+Department of Computer Science and Engineering, IIT Gandhinagar, for access to the AMD KR260 board and tools.\par}
+
+\end{multicols}
+\end{document}
