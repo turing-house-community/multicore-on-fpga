@@ -80,7 +80,7 @@ kr260_run=corev_apu/fpga/kr260/kr260_run.sh
 $kr260_run build/bench/micro.elf 60     | grep MBOX > build/bench/micro_raw.txt   # plot.py needs this file
 python3 $B/plot.py build/bench                                   # build/bench/plots/*.svg, index.html
 ```
-Open `build/bench/plots/index.html` in a browser (from Windows: `explorer.exe build/bench/plots/index.html`). Our PNG versions in `results/plots/` were rendered from the SVGs.
+Open `build/bench/plots/index.html` in a browser (from Windows: `explorer.exe build/bench/plots/index.html`). Our charts are in `results/board/plots/`.
 
 **Check your setup against ours:** `analyze.py` on our raw data reproduces our tables exactly:
 ```bash
