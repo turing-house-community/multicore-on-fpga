@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="340" viewBox="0 0 760 340" role="img" aria-labelledby="t d" font-family='system-ui, -apple-system, "Segoe UI", sans-serif'>
+<title id="t">Removed but not yet freed nodes</title><desc id="d">Nodes removed from the data structure but not yet freed, at the end of a run with 2 threads and 100 percent updates. ca frees immediately and has none.</desc>
+<rect width="760" height="340" fill="#fcfcfb"/>
+<text x="20" y="26" font-size="16" font-weight="600" fill="#0b0b0b">Removed but not yet freed nodes</text>
+<text x="20" y="44" font-size="12" fill="#52514e">End of run, 2 threads, 100% updates, mean of 3 seeds. Lower is better; ca frees each node right after unlinking it.</text>
+<rect x="20" y="57" width="10" height="10" rx="2" fill="#2a78d6"/>
+<text x="35" y="66" font-size="12" fill="#52514e">none (leaky)</text>
+<rect x="137" y="57" width="10" height="10" rx="2" fill="#eb6834"/>
+<text x="152" y="66" font-size="12" fill="#52514e">ca (conditional access)</text>
+<rect x="331" y="57" width="10" height="10" rx="2" fill="#a8431c"/>
+<text x="346" y="66" font-size="12" fill="#52514e">ca, fast check</text>
+<rect x="462" y="57" width="10" height="10" rx="2" fill="#6b2a10"/>
+<text x="477" y="66" font-size="12" fill="#52514e">ca, bcafail</text>
+<rect x="572" y="57" width="10" height="10" rx="2" fill="#1baf7a"/>
+<text x="587" y="66" font-size="12" fill="#52514e">hp (hazard pointers)</text>
+<rect x="745" y="57" width="10" height="10" rx="2" fill="#eda100"/>
+<text x="760" y="66" font-size="12" fill="#52514e">qsbr (epochs)</text>
+<line x1="76" x2="740" y1="294.0" y2="294.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70" y="298.0" font-size="11" fill="#898781" text-anchor="end" style="font-variant-numeric: tabular-nums">0</text>
+<line x1="76" x2="740" y1="241.0" y2="241.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70" y="245.0" font-size="11" fill="#898781" text-anchor="end" style="font-variant-numeric: tabular-nums">1000</text>
+<line x1="76" x2="740" y1="188.0" y2="188.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70" y="192.0" font-size="11" fill="#898781" text-anchor="end" style="font-variant-numeric: tabular-nums">2000</text>
+<line x1="76" x2="740" y1="135.0" y2="135.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70" y="139.0" font-size="11" fill="#898781" text-anchor="end" style="font-variant-numeric: tabular-nums">3000</text>
+<line x1="76" x2="740" y1="82.0" y2="82.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70" y="86.0" font-size="11" fill="#898781" text-anchor="end" style="font-variant-numeric: tabular-nums">4000</text>
+<line x1="76" x2="740" y1="294" y2="294" stroke="#c3c2b7" stroke-width="1"/>
+<text x="24" y="188.0" font-size="11" fill="#52514e" text-anchor="middle" transform="rotate(-90 24 188.0)">nodes</text>
+<path d="M88.0,294.0 V219.1 Q88.0,215.1 92.0,215.1 H106.0 Q110.0,215.1 110.0,219.1 V294.0 Z" fill="#2a78d6"><title>list, none (leaky): 1489 nodes</title></path>
+<text x="99.0" y="210.1" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">1489</text>
+<rect x="112.0" y="293.0" width="22" height="1" fill="#eb6834"><title>list, ca (conditional access): 0 nodes</title></rect>
+<text x="123.0" y="289.0" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">0</text>
+<rect x="136.0" y="293.0" width="22" height="1" fill="#a8431c"><title>list, ca, fast check: 0 nodes</title></rect>
+<text x="147.0" y="289.0" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">0</text>
+<rect x="160.0" y="293.0" width="22" height="1" fill="#6b2a10"><title>list, ca, bcafail: 0 nodes</title></rect>
+<text x="171.0" y="289.0" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">0</text>
+<path d="M184.0,294.0 V294.0 Q184.0,292.9 185.1,292.9 H204.9 Q206.0,292.9 206.0,294.0 V294.0 Z" fill="#1baf7a"><title>list, hp (hazard pointers): 20 nodes</title></path>
+<text x="195.0" y="287.9" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">20</text>
+<path d="M208.0,294.0 V291.9 Q208.0,287.9 212.0,287.9 H226.0 Q230.0,287.9 230.0,291.9 V294.0 Z" fill="#eda100"><title>list, qsbr (epochs): 116 nodes</title></path>
+<text x="219.0" y="282.9" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">116</text>
+<text x="159.0" y="311" font-size="11" fill="#52514e" text-anchor="middle">list</text>
+<path d="M254.0,294.0 V137.5 Q254.0,133.5 258.0,133.5 H272.0 Q276.0,133.5 276.0,137.5 V294.0 Z" fill="#2a78d6"><title>bst, none (leaky): 3028 nodes</title></path>
+<text x="265.0" y="128.5" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">3028</text>
+<rect x="278.0" y="293.0" width="22" height="1" fill="#eb6834"><title>bst, ca (conditional access): 0 nodes</title></rect>
+<text x="289.0" y="289.0" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">0</text>
+<rect x="302.0" y="293.0" width="22" height="1" fill="#a8431c"><title>bst, ca, fast check: 0 nodes</title></rect>
+<text x="313.0" y="289.0" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">0</text>
+<rect x="326.0" y="293.0" width="22" height="1" fill="#6b2a10"><title>bst, ca, bcafail: 0 nodes</title></rect>
+<text x="337.0" y="289.0" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">0</text>
+<path d="M350.0,294.0 V294.0 Q350.0,292.3 351.7,292.3 H370.3 Q372.0,292.3 372.0,294.0 V294.0 Z" fill="#1baf7a"><title>bst, hp (hazard pointers): 32 nodes</title></path>
+<text x="361.0" y="287.3" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">32</text>
+<path d="M374.0,294.0 V290.6 Q374.0,286.6 378.0,286.6 H392.0 Q396.0,286.6 396.0,290.6 V294.0 Z" fill="#eda100"><title>bst, qsbr (epochs): 140 nodes</title></path>
+<text x="385.0" y="281.6" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">140</text>
+<text x="325.0" y="311" font-size="11" fill="#52514e" text-anchor="middle">bst</text>
+<path d="M420.0,294.0 V140.5 Q420.0,136.5 424.0,136.5 H438.0 Q442.0,136.5 442.0,140.5 V294.0 Z" fill="#2a78d6"><title>stack, none (leaky): 2972 nodes</title></path>
+<text x="431.0" y="131.5" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">2972</text>
+<rect x="444.0" y="293.0" width="22" height="1" fill="#eb6834"><title>stack, ca (conditional access): 0 nodes</title></rect>
+<text x="455.0" y="289.0" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">0</text>
+<rect x="468.0" y="293.0" width="22" height="1" fill="#a8431c"><title>stack, ca, fast check: 0 nodes</title></rect>
+<text x="479.0" y="289.0" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">0</text>
+<rect x="492.0" y="293.0" width="22" height="1" fill="#6b2a10"><title>stack, ca, bcafail: 0 nodes</title></rect>
+<text x="503.0" y="289.0" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">0</text>
+<path d="M516.0,294.0 V294.0 Q516.0,292.2 517.8,292.2 H536.2 Q538.0,292.2 538.0,294.0 V294.0 Z" fill="#1baf7a"><title>stack, hp (hazard pointers): 34 nodes</title></path>
+<text x="527.0" y="287.2" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">34</text>
+<path d="M540.0,294.0 V287.3 Q540.0,283.3 544.0,283.3 H558.0 Q562.0,283.3 562.0,287.3 V294.0 Z" fill="#eda100"><title>stack, qsbr (epochs): 202 nodes</title></path>
+<text x="551.0" y="278.3" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">202</text>
+<text x="491.0" y="311" font-size="11" fill="#52514e" text-anchor="middle">stack</text>
+<path d="M586.0,294.0 V219.3 Q586.0,215.3 590.0,215.3 H604.0 Q608.0,215.3 608.0,219.3 V294.0 Z" fill="#2a78d6"><title>hash, none (leaky): 1484 nodes</title></path>
+<text x="597.0" y="210.3" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">1484</text>
+<rect x="610.0" y="293.0" width="22" height="1" fill="#eb6834"><title>hash, ca (conditional access): 0 nodes</title></rect>
+<text x="621.0" y="289.0" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">0</text>
+<rect x="634.0" y="293.0" width="22" height="1" fill="#a8431c"><title>hash, ca, fast check: 0 nodes</title></rect>
+<text x="645.0" y="289.0" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">0</text>
+<rect x="658.0" y="293.0" width="22" height="1" fill="#6b2a10"><title>hash, ca, bcafail: 0 nodes</title></rect>
+<text x="669.0" y="289.0" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">0</text>
+<path d="M682.0,294.0 V294.0 Q682.0,292.8 683.2,292.8 H702.8 Q704.0,292.8 704.0,294.0 V294.0 Z" fill="#1baf7a"><title>hash, hp (hazard pointers): 23 nodes</title></path>
+<text x="693.0" y="287.8" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">23</text>
+<path d="M706.0,294.0 V292.5 Q706.0,288.5 710.0,288.5 H724.0 Q728.0,288.5 728.0,292.5 V294.0 Z" fill="#eda100"><title>hash, qsbr (epochs): 103 nodes</title></path>
+<text x="717.0" y="283.5" font-size="10" fill="#52514e" text-anchor="middle" style="font-variant-numeric: tabular-nums">103</text>
+<text x="657.0" y="311" font-size="11" fill="#52514e" text-anchor="middle">hash</text>
+</svg>

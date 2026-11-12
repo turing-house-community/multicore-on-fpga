@@ -1,0 +1,43 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>KR260 CA benchmarks</title><style>body{background:#f9f9f7;color:#0b0b0b;font-family:system-ui, -apple-system, "Segoe UI", sans-serif;margin:0;padding:16px;max-width:1000px}img{max-width:100%;height:auto;display:block;margin:12px 0 28px;border:1px solid rgba(11,11,11,0.10);border-radius:8px} table{border-collapse:collapse;margin:8px 0 24px;font-size:13px;font-variant-numeric:tabular-nums} th,td{padding:4px 10px;border-bottom:1px solid #e1e0d9;text-align:right} th:first-child,td:first-child{text-align:left} p{color:#52514e}</style></head><body>
+<h1>Conditional access benchmarks on the KR260</h1>
+<p>Two CVA6 cores, MSI-coherent L1s, 50 MHz. Hover a bar for its value. Data tables follow the charts.</p>
+<img src="throughput_list.svg" alt="throughput_list.svg">
+<img src="throughput_bst.svg" alt="throughput_bst.svg">
+<img src="throughput_stack.svg" alt="throughput_stack.svg">
+<img src="throughput_hash.svg" alt="throughput_hash.svg">
+<img src="relative_to_none_2threads.svg" alt="relative_to_none_2threads.svg">
+<img src="unreclaimed_nodes.svg" alt="unreclaimed_nodes.svg">
+<h2>Data</h2>
+<table><thead><tr><th>ds</th><th>updates</th><th>threads</th><th>none Mops/s</th><th>ca Mops/s</th><th>cafast Mops/s</th><th>cabr Mops/s</th><th>hp Mops/s</th><th>qsbr Mops/s</th></tr></thead><tbody>
+<tr><td>list</td><td>0%</td><td>1</td><td>0.028</td><td>0.009</td><td>0.014</td><td>0.014</td><td>0.007</td><td>0.028</td></tr>
+<tr><td>list</td><td>0%</td><td>2</td><td>0.055</td><td>0.018</td><td>0.027</td><td>0.028</td><td>0.014</td><td>0.055</td></tr>
+<tr><td>list</td><td>10%</td><td>1</td><td>0.026</td><td>0.009</td><td>0.013</td><td>0.013</td><td>0.007</td><td>0.026</td></tr>
+<tr><td>list</td><td>10%</td><td>2</td><td>0.052</td><td>0.018</td><td>0.027</td><td>0.025</td><td>0.014</td><td>0.052</td></tr>
+<tr><td>list</td><td>100%</td><td>1</td><td>0.022</td><td>0.009</td><td>0.013</td><td>0.013</td><td>0.007</td><td>0.022</td></tr>
+<tr><td>list</td><td>100%</td><td>2</td><td>0.042</td><td>0.017</td><td>0.025</td><td>0.025</td><td>0.013</td><td>0.042</td></tr>
+<tr><td>bst</td><td>0%</td><td>1</td><td>0.129</td><td>0.060</td><td>0.080</td><td>0.076</td><td>0.049</td><td>0.128</td></tr>
+<tr><td>bst</td><td>0%</td><td>2</td><td>0.257</td><td>0.119</td><td>0.159</td><td>0.153</td><td>0.098</td><td>0.256</td></tr>
+<tr><td>bst</td><td>10%</td><td>1</td><td>0.110</td><td>0.056</td><td>0.073</td><td>0.071</td><td>0.046</td><td>0.107</td></tr>
+<tr><td>bst</td><td>10%</td><td>2</td><td>0.220</td><td>0.111</td><td>0.146</td><td>0.140</td><td>0.092</td><td>0.215</td></tr>
+<tr><td>bst</td><td>100%</td><td>1</td><td>0.086</td><td>0.051</td><td>0.065</td><td>0.064</td><td>0.041</td><td>0.075</td></tr>
+<tr><td>bst</td><td>100%</td><td>2</td><td>0.171</td><td>0.102</td><td>0.129</td><td>0.127</td><td>0.081</td><td>0.153</td></tr>
+<tr><td>stack</td><td>0%</td><td>1</td><td>2.093</td><td>0.783</td><td>0.894</td><td>0.879</td><td>1.043</td><td>1.929</td></tr>
+<tr><td>stack</td><td>0%</td><td>2</td><td>4.186</td><td>1.565</td><td>1.788</td><td>1.757</td><td>2.086</td><td>3.859</td></tr>
+<tr><td>stack</td><td>10%</td><td>1</td><td>0.672</td><td>0.481</td><td>0.519</td><td>0.516</td><td>0.541</td><td>0.624</td></tr>
+<tr><td>stack</td><td>10%</td><td>2</td><td>1.224</td><td>0.902</td><td>0.970</td><td>0.968</td><td>0.979</td><td>1.144</td></tr>
+<tr><td>stack</td><td>100%</td><td>1</td><td>0.396</td><td>0.408</td><td>0.414</td><td>0.440</td><td>0.354</td><td>0.280</td></tr>
+<tr><td>stack</td><td>100%</td><td>2</td><td>0.416</td><td>0.498</td><td>0.520</td><td>0.528</td><td>0.413</td><td>0.427</td></tr>
+<tr><td>hash</td><td>0%</td><td>1</td><td>0.741</td><td>0.347</td><td>0.404</td><td>0.465</td><td>0.337</td><td>0.730</td></tr>
+<tr><td>hash</td><td>0%</td><td>2</td><td>1.437</td><td>0.685</td><td>0.808</td><td>0.925</td><td>0.671</td><td>1.428</td></tr>
+<tr><td>hash</td><td>10%</td><td>1</td><td>0.427</td><td>0.262</td><td>0.296</td><td>0.323</td><td>0.250</td><td>0.418</td></tr>
+<tr><td>hash</td><td>10%</td><td>2</td><td>0.800</td><td>0.503</td><td>0.565</td><td>0.636</td><td>0.478</td><td>0.785</td></tr>
+<tr><td>hash</td><td>100%</td><td>1</td><td>0.244</td><td>0.184</td><td>0.202</td><td>0.235</td><td>0.161</td><td>0.214</td></tr>
+<tr><td>hash</td><td>100%</td><td>2</td><td>0.373</td><td>0.301</td><td>0.326</td><td>0.369</td><td>0.259</td><td>0.340</td></tr>
+</tbody></table>
+<table><thead><tr><th>ds</th><th>none unreclaimed</th><th>ca unreclaimed</th><th>cafast unreclaimed</th><th>cabr unreclaimed</th><th>hp unreclaimed</th><th>qsbr unreclaimed</th></tr></thead><tbody>
+<tr><td>list</td><td>1489</td><td>0</td><td>0</td><td>0</td><td>20</td><td>118</td></tr>
+<tr><td>bst</td><td>3028</td><td>0</td><td>0</td><td>0</td><td>32</td><td>141</td></tr>
+<tr><td>stack</td><td>2972</td><td>0</td><td>0</td><td>0</td><td>34</td><td>202</td></tr>
+<tr><td>hash</td><td>1485</td><td>0</td><td>0</td><td>0</td><td>23</td><td>102</td></tr>
+</tbody></table>
+</body></html>

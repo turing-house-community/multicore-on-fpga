@@ -1,0 +1,43 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>KR260 CA benchmarks</title><style>body{background:#f9f9f7;color:#0b0b0b;font-family:system-ui, -apple-system, "Segoe UI", sans-serif;margin:0;padding:16px;max-width:1000px}img{max-width:100%;height:auto;display:block;margin:12px 0 28px;border:1px solid rgba(11,11,11,0.10);border-radius:8px} table{border-collapse:collapse;margin:8px 0 24px;font-size:13px;font-variant-numeric:tabular-nums} th,td{padding:4px 10px;border-bottom:1px solid #e1e0d9;text-align:right} th:first-child,td:first-child{text-align:left} p{color:#52514e}</style></head><body>
+<h1>Conditional access benchmarks on the KR260</h1>
+<p>Two CVA6 cores, MSI-coherent L1s, 50 MHz. Hover a bar for its value. Data tables follow the charts.</p>
+<img src="throughput_list.svg" alt="throughput_list.svg">
+<img src="throughput_bst.svg" alt="throughput_bst.svg">
+<img src="throughput_stack.svg" alt="throughput_stack.svg">
+<img src="throughput_hash.svg" alt="throughput_hash.svg">
+<img src="relative_to_none_2threads.svg" alt="relative_to_none_2threads.svg">
+<img src="unreclaimed_nodes.svg" alt="unreclaimed_nodes.svg">
+<h2>Data</h2>
+<table><thead><tr><th>ds</th><th>updates</th><th>threads</th><th>none Mops/s</th><th>ca Mops/s</th><th>hp Mops/s</th><th>qsbr Mops/s</th></tr></thead><tbody>
+<tr><td>list</td><td>0%</td><td>1</td><td>0.028</td><td>0.009</td><td>0.007</td><td>0.028</td></tr>
+<tr><td>list</td><td>0%</td><td>2</td><td>0.055</td><td>0.018</td><td>0.014</td><td>0.055</td></tr>
+<tr><td>list</td><td>10%</td><td>1</td><td>0.026</td><td>0.009</td><td>0.007</td><td>0.026</td></tr>
+<tr><td>list</td><td>10%</td><td>2</td><td>0.051</td><td>0.018</td><td>0.014</td><td>0.051</td></tr>
+<tr><td>list</td><td>100%</td><td>1</td><td>0.022</td><td>0.009</td><td>0.007</td><td>0.021</td></tr>
+<tr><td>list</td><td>100%</td><td>2</td><td>0.038</td><td>0.017</td><td>0.013</td><td>0.038</td></tr>
+<tr><td>bst</td><td>0%</td><td>1</td><td>0.086</td><td>0.049</td><td>0.041</td><td>0.086</td></tr>
+<tr><td>bst</td><td>0%</td><td>2</td><td>0.145</td><td>0.093</td><td>0.081</td><td>0.144</td></tr>
+<tr><td>bst</td><td>10%</td><td>1</td><td>0.076</td><td>0.045</td><td>0.039</td><td>0.074</td></tr>
+<tr><td>bst</td><td>10%</td><td>2</td><td>0.132</td><td>0.088</td><td>0.076</td><td>0.128</td></tr>
+<tr><td>bst</td><td>100%</td><td>1</td><td>0.059</td><td>0.041</td><td>0.034</td><td>0.051</td></tr>
+<tr><td>bst</td><td>100%</td><td>2</td><td>0.098</td><td>0.077</td><td>0.064</td><td>0.089</td></tr>
+<tr><td>stack</td><td>0%</td><td>1</td><td>2.083</td><td>0.781</td><td>1.041</td><td>1.923</td></tr>
+<tr><td>stack</td><td>0%</td><td>2</td><td>4.169</td><td>1.561</td><td>2.080</td><td>3.843</td></tr>
+<tr><td>stack</td><td>10%</td><td>1</td><td>0.658</td><td>0.478</td><td>0.535</td><td>0.612</td></tr>
+<tr><td>stack</td><td>10%</td><td>2</td><td>1.015</td><td>0.778</td><td>0.850</td><td>0.955</td></tr>
+<tr><td>stack</td><td>100%</td><td>1</td><td>0.358</td><td>0.400</td><td>0.347</td><td>0.222</td></tr>
+<tr><td>stack</td><td>100%</td><td>2</td><td>0.188</td><td>0.250</td><td>0.210</td><td>0.200</td></tr>
+<tr><td>hash</td><td>0%</td><td>1</td><td>0.740</td><td>0.315</td><td>0.294</td><td>0.729</td></tr>
+<tr><td>hash</td><td>0%</td><td>2</td><td>1.180</td><td>0.575</td><td>0.571</td><td>1.173</td></tr>
+<tr><td>hash</td><td>10%</td><td>1</td><td>0.404</td><td>0.257</td><td>0.243</td><td>0.397</td></tr>
+<tr><td>hash</td><td>10%</td><td>2</td><td>0.623</td><td>0.431</td><td>0.405</td><td>0.613</td></tr>
+<tr><td>hash</td><td>100%</td><td>1</td><td>0.224</td><td>0.181</td><td>0.156</td><td>0.202</td></tr>
+<tr><td>hash</td><td>100%</td><td>2</td><td>0.198</td><td>0.194</td><td>0.168</td><td>0.195</td></tr>
+</tbody></table>
+<table><thead><tr><th>ds</th><th>none unreclaimed</th><th>ca unreclaimed</th><th>hp unreclaimed</th><th>qsbr unreclaimed</th></tr></thead><tbody>
+<tr><td>list</td><td>1488</td><td>0</td><td>19</td><td>115</td></tr>
+<tr><td>bst</td><td>3028</td><td>0</td><td>32</td><td>140</td></tr>
+<tr><td>stack</td><td>2972</td><td>0</td><td>34</td><td>188</td></tr>
+<tr><td>hash</td><td>1492</td><td>0</td><td>20</td><td>125</td></tr>
+</tbody></table>
+</body></html>

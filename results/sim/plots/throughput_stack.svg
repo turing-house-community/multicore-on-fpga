@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="340" viewBox="0 0 760 340" role="img" aria-labelledby="t d" font-family='system-ui, -apple-system, "Segoe UI", sans-serif'>
+<title id="t">Treiber stack: throughput</title><desc id="d">Throughput in million operations per second for each reclamation scheme, at 0, 10 and 100 percent updates, with 1 and 2 threads, on the KR260 at 50 MHz.</desc>
+<rect width="760" height="340" fill="#fcfcfb"/>
+<text x="20" y="26" font-size="16" font-weight="600" fill="#0b0b0b">Treiber stack: throughput</text>
+<text x="20" y="44" font-size="12" fill="#52514e">Million operations per second, mean of 3 seeds, KR260 at 50 MHz. Higher is better.</text>
+<rect x="20" y="57" width="10" height="10" rx="2" fill="#2a78d6"/>
+<text x="35" y="66" font-size="12" fill="#52514e">none (leaky)</text>
+<rect x="137" y="57" width="10" height="10" rx="2" fill="#eb6834"/>
+<text x="152" y="66" font-size="12" fill="#52514e">ca (conditional access)</text>
+<rect x="331" y="57" width="10" height="10" rx="2" fill="#a8431c"/>
+<text x="346" y="66" font-size="12" fill="#52514e">ca, fast check</text>
+<rect x="462" y="57" width="10" height="10" rx="2" fill="#6b2a10"/>
+<text x="477" y="66" font-size="12" fill="#52514e">ca, bcafail</text>
+<rect x="572" y="57" width="10" height="10" rx="2" fill="#1baf7a"/>
+<text x="587" y="66" font-size="12" fill="#52514e">hp (hazard pointers)</text>
+<rect x="745" y="57" width="10" height="10" rx="2" fill="#eda100"/>
+<text x="760" y="66" font-size="12" fill="#52514e">qsbr (epochs)</text>
+<line x1="76" x2="740" y1="284.0" y2="284.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70" y="288.0" font-size="11" fill="#898781" text-anchor="end" style="font-variant-numeric: tabular-nums">0</text>
+<line x1="76" x2="740" y1="243.6" y2="243.6" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70" y="247.6" font-size="11" fill="#898781" text-anchor="end" style="font-variant-numeric: tabular-nums">1</text>
+<line x1="76" x2="740" y1="203.2" y2="203.2" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70" y="207.2" font-size="11" fill="#898781" text-anchor="end" style="font-variant-numeric: tabular-nums">2</text>
+<line x1="76" x2="740" y1="162.8" y2="162.8" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70" y="166.8" font-size="11" fill="#898781" text-anchor="end" style="font-variant-numeric: tabular-nums">3</text>
+<line x1="76" x2="740" y1="122.4" y2="122.4" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70" y="126.4" font-size="11" fill="#898781" text-anchor="end" style="font-variant-numeric: tabular-nums">4</text>
+<line x1="76" x2="740" y1="82.0" y2="82.0" stroke="#e1e0d9" stroke-width="1"/>
+<text x="70" y="86.0" font-size="11" fill="#898781" text-anchor="end" style="font-variant-numeric: tabular-nums">5</text>
+<line x1="76" x2="740" y1="284" y2="284" stroke="#c3c2b7" stroke-width="1"/>
+<text x="24" y="183.0" font-size="11" fill="#52514e" text-anchor="middle" transform="rotate(-90 24 183.0)">Mops/s</text>
+<path d="M84.3,284.0 V203.5 Q84.3,199.5 88.3,199.5 H94.3 Q98.3,199.5 98.3,203.5 V284.0 Z" fill="#2a78d6"><title>none (leaky), 0% updates, 1 thread: 2.09 Mops/s</title></path>
+<path d="M100.3,284.0 V256.4 Q100.3,252.4 104.3,252.4 H110.3 Q114.3,252.4 114.3,256.4 V284.0 Z" fill="#eb6834"><title>ca (conditional access), 0% updates, 1 thread: 0.783 Mops/s (0.37x none)</title></path>
+<path d="M116.3,284.0 V251.9 Q116.3,247.9 120.3,247.9 H126.3 Q130.3,247.9 130.3,251.9 V284.0 Z" fill="#a8431c"><title>ca, fast check, 0% updates, 1 thread: 0.894 Mops/s (0.43x none)</title></path>
+<path d="M132.3,284.0 V252.5 Q132.3,248.5 136.3,248.5 H142.3 Q146.3,248.5 146.3,252.5 V284.0 Z" fill="#6b2a10"><title>ca, bcafail, 0% updates, 1 thread: 0.879 Mops/s (0.42x none)</title></path>
+<path d="M148.3,284.0 V245.9 Q148.3,241.9 152.3,241.9 H158.3 Q162.3,241.9 162.3,245.9 V284.0 Z" fill="#1baf7a"><title>hp (hazard pointers), 0% updates, 1 thread: 1.04 Mops/s (0.50x none)</title></path>
+<path d="M164.3,284.0 V210.0 Q164.3,206.0 168.3,206.0 H174.3 Q178.3,206.0 178.3,210.0 V284.0 Z" fill="#eda100"><title>qsbr (epochs), 0% updates, 1 thread: 1.93 Mops/s (0.92x none)</title></path>
+<text x="131.3" y="301" font-size="11" fill="#52514e" text-anchor="middle">0% upd</text>
+<text x="131.3" y="315" font-size="11" fill="#898781" text-anchor="middle">1 thread</text>
+<path d="M195.0,284.0 V118.9 Q195.0,114.9 199.0,114.9 H205.0 Q209.0,114.9 209.0,118.9 V284.0 Z" fill="#2a78d6"><title>none (leaky), 0% updates, 2 threads: 4.19 Mops/s</title></path>
+<path d="M211.0,284.0 V224.8 Q211.0,220.8 215.0,220.8 H221.0 Q225.0,220.8 225.0,224.8 V284.0 Z" fill="#eb6834"><title>ca (conditional access), 0% updates, 2 threads: 1.56 Mops/s (0.37x none)</title></path>
+<path d="M227.0,284.0 V215.8 Q227.0,211.8 231.0,211.8 H237.0 Q241.0,211.8 241.0,215.8 V284.0 Z" fill="#a8431c"><title>ca, fast check, 0% updates, 2 threads: 1.79 Mops/s (0.43x none)</title></path>
+<path d="M243.0,284.0 V217.0 Q243.0,213.0 247.0,213.0 H253.0 Q257.0,213.0 257.0,217.0 V284.0 Z" fill="#6b2a10"><title>ca, bcafail, 0% updates, 2 threads: 1.76 Mops/s (0.42x none)</title></path>
+<path d="M259.0,284.0 V203.7 Q259.0,199.7 263.0,199.7 H269.0 Q273.0,199.7 273.0,203.7 V284.0 Z" fill="#1baf7a"><title>hp (hazard pointers), 0% updates, 2 threads: 2.09 Mops/s (0.50x none)</title></path>
+<path d="M275.0,284.0 V132.1 Q275.0,128.1 279.0,128.1 H285.0 Q289.0,128.1 289.0,132.1 V284.0 Z" fill="#eda100"><title>qsbr (epochs), 0% updates, 2 threads: 3.86 Mops/s (0.92x none)</title></path>
+<text x="242.0" y="301" font-size="11" fill="#52514e" text-anchor="middle">0% upd</text>
+<text x="242.0" y="315" font-size="11" fill="#898781" text-anchor="middle">2 threads</text>
+<path d="M305.7,284.0 V260.9 Q305.7,256.9 309.7,256.9 H315.7 Q319.7,256.9 319.7,260.9 V284.0 Z" fill="#2a78d6"><title>none (leaky), 10% updates, 1 thread: 0.672 Mops/s</title></path>
+<path d="M321.7,284.0 V268.6 Q321.7,264.6 325.7,264.6 H331.7 Q335.7,264.6 335.7,268.6 V284.0 Z" fill="#eb6834"><title>ca (conditional access), 10% updates, 1 thread: 0.481 Mops/s (0.72x none)</title></path>
+<path d="M337.7,284.0 V267.0 Q337.7,263.0 341.7,263.0 H347.7 Q351.7,263.0 351.7,267.0 V284.0 Z" fill="#a8431c"><title>ca, fast check, 10% updates, 1 thread: 0.519 Mops/s (0.77x none)</title></path>
+<path d="M353.7,284.0 V267.2 Q353.7,263.2 357.7,263.2 H363.7 Q367.7,263.2 367.7,267.2 V284.0 Z" fill="#6b2a10"><title>ca, bcafail, 10% updates, 1 thread: 0.516 Mops/s (0.77x none)</title></path>
+<path d="M369.7,284.0 V266.1 Q369.7,262.1 373.7,262.1 H379.7 Q383.7,262.1 383.7,266.1 V284.0 Z" fill="#1baf7a"><title>hp (hazard pointers), 10% updates, 1 thread: 0.541 Mops/s (0.81x none)</title></path>
+<path d="M385.7,284.0 V262.8 Q385.7,258.8 389.7,258.8 H395.7 Q399.7,258.8 399.7,262.8 V284.0 Z" fill="#eda100"><title>qsbr (epochs), 10% updates, 1 thread: 0.624 Mops/s (0.93x none)</title></path>
+<text x="352.7" y="301" font-size="11" fill="#52514e" text-anchor="middle">10% upd</text>
+<text x="352.7" y="315" font-size="11" fill="#898781" text-anchor="middle">1 thread</text>
+<path d="M416.3,284.0 V238.6 Q416.3,234.6 420.3,234.6 H426.3 Q430.3,234.6 430.3,238.6 V284.0 Z" fill="#2a78d6"><title>none (leaky), 10% updates, 2 threads: 1.22 Mops/s</title></path>
+<path d="M432.3,284.0 V251.6 Q432.3,247.6 436.3,247.6 H442.3 Q446.3,247.6 446.3,251.6 V284.0 Z" fill="#eb6834"><title>ca (conditional access), 10% updates, 2 threads: 0.901 Mops/s (0.74x none)</title></path>
+<path d="M448.3,284.0 V248.8 Q448.3,244.8 452.3,244.8 H458.3 Q462.3,244.8 462.3,248.8 V284.0 Z" fill="#a8431c"><title>ca, fast check, 10% updates, 2 threads: 0.970 Mops/s (0.79x none)</title></path>
+<path d="M464.3,284.0 V248.9 Q464.3,244.9 468.3,244.9 H474.3 Q478.3,244.9 478.3,248.9 V284.0 Z" fill="#6b2a10"><title>ca, bcafail, 10% updates, 2 threads: 0.968 Mops/s (0.79x none)</title></path>
+<path d="M480.3,284.0 V248.5 Q480.3,244.5 484.3,244.5 H490.3 Q494.3,244.5 494.3,248.5 V284.0 Z" fill="#1baf7a"><title>hp (hazard pointers), 10% updates, 2 threads: 0.979 Mops/s (0.80x none)</title></path>
+<path d="M496.3,284.0 V241.8 Q496.3,237.8 500.3,237.8 H506.3 Q510.3,237.8 510.3,241.8 V284.0 Z" fill="#eda100"><title>qsbr (epochs), 10% updates, 2 threads: 1.14 Mops/s (0.93x none)</title></path>
+<text x="463.3" y="301" font-size="11" fill="#52514e" text-anchor="middle">10% upd</text>
+<text x="463.3" y="315" font-size="11" fill="#898781" text-anchor="middle">2 threads</text>
+<path d="M527.0,284.0 V272.0 Q527.0,268.0 531.0,268.0 H537.0 Q541.0,268.0 541.0,272.0 V284.0 Z" fill="#2a78d6"><title>none (leaky), 100% updates, 1 thread: 0.396 Mops/s</title></path>
+<path d="M543.0,284.0 V271.5 Q543.0,267.5 547.0,267.5 H553.0 Q557.0,267.5 557.0,271.5 V284.0 Z" fill="#eb6834"><title>ca (conditional access), 100% updates, 1 thread: 0.408 Mops/s (1.03x none)</title></path>
+<path d="M559.0,284.0 V271.3 Q559.0,267.3 563.0,267.3 H569.0 Q573.0,267.3 573.0,271.3 V284.0 Z" fill="#a8431c"><title>ca, fast check, 100% updates, 1 thread: 0.414 Mops/s (1.05x none)</title></path>
+<path d="M575.0,284.0 V270.2 Q575.0,266.2 579.0,266.2 H585.0 Q589.0,266.2 589.0,270.2 V284.0 Z" fill="#6b2a10"><title>ca, bcafail, 100% updates, 1 thread: 0.440 Mops/s (1.11x none)</title></path>
+<path d="M591.0,284.0 V273.7 Q591.0,269.7 595.0,269.7 H601.0 Q605.0,269.7 605.0,273.7 V284.0 Z" fill="#1baf7a"><title>hp (hazard pointers), 100% updates, 1 thread: 0.354 Mops/s (0.89x none)</title></path>
+<path d="M607.0,284.0 V276.7 Q607.0,272.7 611.0,272.7 H617.0 Q621.0,272.7 621.0,276.7 V284.0 Z" fill="#eda100"><title>qsbr (epochs), 100% updates, 1 thread: 0.280 Mops/s (0.71x none)</title></path>
+<text x="574.0" y="301" font-size="11" fill="#52514e" text-anchor="middle">100% upd</text>
+<text x="574.0" y="315" font-size="11" fill="#898781" text-anchor="middle">1 thread</text>
+<path d="M637.7,284.0 V271.2 Q637.7,267.2 641.7,267.2 H647.7 Q651.7,267.2 651.7,271.2 V284.0 Z" fill="#2a78d6"><title>none (leaky), 100% updates, 2 threads: 0.417 Mops/s</title></path>
+<path d="M653.7,284.0 V267.9 Q653.7,263.9 657.7,263.9 H663.7 Q667.7,263.9 667.7,267.9 V284.0 Z" fill="#eb6834"><title>ca (conditional access), 100% updates, 2 threads: 0.497 Mops/s (1.19x none)</title></path>
+<path d="M669.7,284.0 V267.0 Q669.7,263.0 673.7,263.0 H679.7 Q683.7,263.0 683.7,267.0 V284.0 Z" fill="#a8431c"><title>ca, fast check, 100% updates, 2 threads: 0.520 Mops/s (1.25x none)</title></path>
+<path d="M685.7,284.0 V266.7 Q685.7,262.7 689.7,262.7 H695.7 Q699.7,262.7 699.7,266.7 V284.0 Z" fill="#6b2a10"><title>ca, bcafail, 100% updates, 2 threads: 0.527 Mops/s (1.27x none)</title></path>
+<path d="M701.7,284.0 V271.3 Q701.7,267.3 705.7,267.3 H711.7 Q715.7,267.3 715.7,271.3 V284.0 Z" fill="#1baf7a"><title>hp (hazard pointers), 100% updates, 2 threads: 0.413 Mops/s (0.99x none)</title></path>
+<path d="M717.7,284.0 V270.8 Q717.7,266.8 721.7,266.8 H727.7 Q731.7,266.8 731.7,270.8 V284.0 Z" fill="#eda100"><title>qsbr (epochs), 100% updates, 2 threads: 0.427 Mops/s (1.02x none)</title></path>
+<text x="684.7" y="301" font-size="11" fill="#52514e" text-anchor="middle">100% upd</text>
+<text x="684.7" y="315" font-size="11" fill="#898781" text-anchor="middle">2 threads</text>
+</svg>
