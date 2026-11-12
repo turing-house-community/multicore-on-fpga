@@ -8,7 +8,7 @@ The compiled poster is [`../poster.pdf`](../poster.pdf) (A1 portrait).
 | `figures/make_figs.py` | draws every figure as SVG: `python3 figures/make_figs.py figures` |
 | `figures/*.png` | the figures as used by `poster.tex` (SVGs rendered at 3× in a browser) |
 
-The benchmark numbers in the figures and tables are typed in by hand from [`results/`](../../../results/). If you rerun the benchmarks, update them in `make_figs.py` and `poster.tex`.
+The benchmark numbers in the figures and tables are typed in by hand from [`results/`](../../../../results/). If you rerun the benchmarks, update them in `make_figs.py` and `poster.tex`.
 
 ## Build
 - **Overleaf:** upload `poster.tex` and the `figures/` folder, compile with pdfLaTeX.

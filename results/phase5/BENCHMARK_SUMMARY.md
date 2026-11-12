@@ -160,4 +160,4 @@ The spread between the 3 seeds is small (see `summary.csv`, `mops_spread_pct`).
 | `micro_coh.md`, `micro_coh_raw.txt` | coherence costs |
 | `plots/` | charts (`index.html`, SVG, PNG) |
 
-The 96 benchmark binaries are not stored; rebuild them with `build_all.sh` ([docs/05_benchmarks.md](../docs/05_benchmarks.md)).
+The 96 benchmark binaries are not stored; rebuild them with `build_all.sh` ([docs/05_benchmarks.md](../../docs/05_benchmarks.md)).
