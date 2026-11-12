@@ -95,4 +95,4 @@ Practical things that cost us days:
 
 ---
 
-**Next:** [the project in depth](08_in_depth.md).
+**Next:** [the project in depth](in_depth.md), with a FAQ.

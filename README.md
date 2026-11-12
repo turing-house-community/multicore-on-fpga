@@ -90,7 +90,7 @@ Details: [docs/06_results.md](docs/06_results.md).
 | 5 | [Benchmarks](docs/05_benchmarks.md) | rerun the paper's evaluation |
 | 6 | [Results](docs/06_results.md) | see what we measured |
 | 7 | [Challenges](docs/07_challenges.md) | learn from our mistakes and decisions |
-| 8 | [In depth](docs/08_in_depth.md) | follow one idea through the whole system |
+| – | [In depth](docs/in_depth.md) | the whole project in one place, with a FAQ |
 | – | [Code map](docs/code_map.md) | find every file we changed in CVA6 |
 
 ## Repository layout
