@@ -1,0 +1,16 @@
+%----------------------------------------------------------------------------------------
+%  A0 version of poster.tex: the A1 poster scaled by sqrt(2) (841 x 1189 mm).
+%  Every size grows by 41% (body text 17 pt -> 24 pt); the layout is identical.
+%  Compile poster.tex first (it produces poster.pdf), then this file.
+%  On Overleaf: compile poster.tex, download its PDF, upload it as poster.pdf,
+%  then compile this file. Or use ../poster_a0.pdf directly.
+%----------------------------------------------------------------------------------------
+\documentclass{article}
+\usepackage[paperwidth=841mm,paperheight=1189mm,margin=0mm]{geometry}
+\usepackage{graphicx}
+\pagestyle{empty}
+\begin{document}
+\setlength{\parindent}{0pt}\setlength{\topskip}{0pt}%
+\vspace*{-\topskip}%
+\makebox[0pt][l]{\raisebox{-\height}[0pt][0pt]{\includegraphics[width=\paperwidth,height=\paperheight]{poster.pdf}}}%
+\end{document}
