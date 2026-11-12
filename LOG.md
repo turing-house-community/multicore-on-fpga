@@ -5,6 +5,19 @@ Tag event entries with [LAUNCH], [MIDPOINT], or [COMPLETION].
 ## 2026-11-13
 - [COMPLETION] Final presentation at Turing House. Poster in docs/talks/poster.pdf.
 
+## 2026-11-12
+- Added `bcafail`, a branch on CA failure: the paper assumes a flag register (EFLAGS on x86), and RISC-V has none. `cread` + check: 4 cycles (CSR 7, fast check 5); 17 LUTs. Every outcome matches the CSR in `bcafail.S`. CA with `bcafail` is now ahead of epochs on the hash table at 100% updates.
+- Added a shared 256 KiB L2, as in the paper. The first bitstream hung on the board: the L2 changed an AXI request while waiting for it to be accepted. Our assertions for that rule never ran, because Verilator only checks them with `--assert`. Fixed the L2, made the testbench's DDR stall at random, and build with `--assert` from now on.
+- With the L2: miss 54 → 33 cycles, handoff 151 → 59, never-free throughput up to 2.26× on the stack. CA's ratios drop a little, the winners stay the same. Simulation now matches the board exactly.
+- The paper has no 2-thread point; estimated it from its 1- and 4-thread points. Found that our plot reader read the list and BST at 4 threads about 20% too high.
+- Final poster (A1, plus an A0 version).
+
+## 2026-11-11
+- Retire lists down to 512 nodes, and QSBR now waits when its list is full, so epochs cannot hide unbounded garbage.
+- Added a directory next to the bus, selectable. On the board it is up to 17% faster when both cores miss on different lines, never more than 2% slower.
+- A failed `cread` now returns all ones, so software compares the value and reads the CSR only on a match (fast check): CA up to 1.5× faster on read-heavy work.
+- Ran every benchmark on a cycle-exact simulation of the FPGA design too, with DDR latency calibrated to the board (34 cycles): median difference 0%, worst 13% in a few contended cases.
+
 ## 2026-11-08
 - Project moved into this repository: CVA6 fork as a submodule, step-by-step docs, prebuilt bitstream, raw results. Testbench file lists, negative controls and run scripts moved from personal folders into the fork.
 
