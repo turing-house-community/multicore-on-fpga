@@ -10,10 +10,10 @@ There is **no operating system** on the board. The ARM cores on the chip only pr
  PL (FPGA)                                                    PS (ARM side)
  +-------------------------------------------------------+    +--------------+
  | core 0 --cut--+                                       |    |              |
- |               +-- arbiter --> address remap --> HP0 --+--->| DDR          |
+ |               +-- arbiter --> L2 --> addr remap --> HP0 -->| DDR          |
  | core 1 --cut--+        |                              |    | (cores use   |
  |   |      |             +-------> mailbox BRAM <-------+----| 0x4000_0000+)|
- |   +--cc_bus (coherence)          (8 KB, shared)       |    |              |
+ |   +--cc_directory (coherence)    (8 KB, shared)       |    |              |
  |                                  run bit (GPIO) <-----+----| JTAG/debug   |
  +-------------------------------------------------------+    +--------------+
 ```
@@ -23,6 +23,8 @@ There is **no operating system** on the board. The ARM cores on the chip only pr
 | `0x8000_0000 – 0xBFFF_FFFF` | DDR, cacheable; programs are linked here | `0x4000_0000` |
 | `0xC000_0000` | **mailbox**, uncached (results, `tohost`) | `0xA000_0000` |
 | – | **run bit**: cores run while it is 1 | `0xA001_0000` |
+
+The shared L2 (256 KiB) caches DDR only; the mailbox passes through it. It is cleared every time a program is loaded, because the ARM side writes the new program straight into DDR.
 
 **Why a mailbox?** The caches are write-back, so a result a core stores to DDR may stay in its cache, invisible to the PC. The mailbox is uncached: writes go straight out. The linker script `sw/link_kr260.ld` therefore places `tohost` at `0xC000_0000`, and benchmarks write their numbers to mailbox words 16 and up.
 
@@ -36,13 +38,16 @@ There is **no operating system** on the board. The ARM cores on the chip only pr
 
 | Item | Value |
 |---|---|
-| Clock | 50 MHz (timing met with 2.39 ns to spare) |
-| LUTs | 58,853 of 117,120 (50%) |
-| Registers | 32,058 of 234,240 (14%) |
-| Block RAM | 74 of 144 (51%) |
-| Per core | about 25K LUTs and 41 block RAMs |
-| CA unit (`ca_tag_set`) | about 1,100 LUTs and 540 registers per core, no block RAM |
-| Coherence bus (`cc_bus`) | 48 LUTs, 40 registers |
+| Clock | 50 MHz (timing met with 2.86 ns to spare) |
+| LUTs | 78,120 of 117,120 (67%) |
+| Registers | 46,128 of 234,240 (20%) |
+| Block RAM | 78 of 144 tiles (54%) |
+| UltraRAM | 10 of 64 |
+| Per core | about 25K LUTs |
+| CA unit (`ca_tag_set`) | about 1,000 LUTs and 540 registers per core, no memory blocks |
+| `bcafail` | 17 LUTs in total |
+| Directory (`cc_directory`) | 676 LUTs, 2 UltraRAM |
+| Shared L2 (`axi_l2_cache`) | 18,508 LUTs, 8 UltraRAM, 8 small block RAMs |
 
 ---
 
@@ -102,6 +107,7 @@ MBOX 0 0 0 ...
 Later runs skip the FPGA programming and take a few seconds:
 ```bash
 corev_apu/fpga/kr260/kr260_run.sh build/board/msi_2core.elf 30
+corev_apu/fpga/kr260/kr260_run.sh build/board/bcafail.elf 30
 corev_apu/fpga/kr260/kr260_run.sh build/board/controls/plain_reads.elf 30    # must FAIL code 30
 corev_apu/fpga/kr260/kr260_run.sh build/board/controls/plain_lock.elf 30     # must FAIL code 32
 corev_apu/fpga/kr260/kr260_run.sh build/board/controls/need_revoked.elf 30   # PASS
@@ -121,6 +127,7 @@ done | tee board_isa.txt | grep -v PASS
 |---|---|---|
 | `msi_2core` | PASS, 10/10 runs | PASS |
 | `ca_2core` | PASS, 10/10 runs | PASS |
+| `bcafail` | PASS; 2,000 rounds, every outcome equal to the CSR | PASS |
 | `plain_reads` (plain loads instead of `cread`) | FAIL code 30, as intended | same |
 | `plain_lock` (plain store instead of `cwrite`) | FAIL code 32, as intended | same |
 | `need_revoked` | PASS | same |
