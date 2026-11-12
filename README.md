@@ -20,7 +20,7 @@ cd multicore-on-fpga/cva6
 
 # 2. Install the tools: RISC-V GCC, Verilator, Spike (once; see docs/00_getting_started.md)
 
-# 3. Two caches + coherence bus + CA units, random traffic against reference models (~2 min)
+# 3. Two caches + directory + CA units, random traffic against reference models (~2 min)
 mkdir -p build
 verilator --binary --timing -j 8 -Wno-fatal -Wno-lint -Wno-style -Wno-UNOPTFLAT \
   --top-module std_nbdcache_2core_tb -Mdir build/tb2 -f core/cache_subsystem/test/std_nbdcache_2core_tb.f
@@ -44,26 +44,29 @@ Keep the repository inside the Linux/WSL file system (not `/mnt/c/...`), or buil
 
 Starting from the open-source single-core [CVA6](https://github.com/openhwgroup/cva6) RISC-V processor (32-bit, RV32IMAC):
 1. **A second core** with its own private L1 data cache.
-2. **MSI cache coherence** between the two write-back caches, over a small snooping bus.
+2. **MSI cache coherence** between the two write-back caches, through a directory (our first version used a snooping bus, which is still selectable).
 3. **The four CA instructions** in the pipeline: `cread`, `cwrite`, `untagOne`, `untagAll`, with a failure flag in CSR 0xCC0.
-4. **The system on an AMD KR260**: both cores at 50 MHz using the board's DDR, programs loaded over JTAG.
+4. **`bcafail`, a new branch instruction** that jumps if a CA operation failed. The paper assumes a flag register, which RISC-V does not have; this is the closest RISC-V equivalent.
+5. **A shared 256 KiB L2 cache** in front of DDR, as in the paper's platform.
+6. **The system on an AMD KR260**: both cores at 50 MHz using the board's DDR, programs loaded over JTAG.
 
-Then we verified it (randomized testbenches, injected bugs, ISA tests, on-board tests) and ran the paper's benchmarks on the board. [How the hardware works](docs/02_design.md).
+Then we verified it (randomized testbenches, injected bugs, ISA tests, on-board tests) and ran the paper's benchmarks on the board and on a cycle-exact simulation of the same design. [How the hardware works](docs/02_design.md).
 
 | | |
 |---|---|
-| **Memory** | CA frees every removed node immediately: **0** unfreed nodes, vs. 100–200 for epochs and 1,500–3,000 for never freeing |
-| **Throughput** | fastest scheme under high contention: **1.33×** the never-freeing baseline on a stack (hazard pointers 1.09×, epochs 1.05×); slower on read-heavy work because the failure check is a CSR read |
-| **Latency** | `cread` 2 cycles (plain load 1); `cread` + failure check 7; `cread` + `cwrite` 17 (`amoswap` 14) |
-| **Coherence cost** | plain miss 54 cycles, miss to a line the other core holds dirty 97, invalidating a clean copy ~1 |
-| **Area** | CA unit ~1,100 LUTs per core (4.5% of a core), no block RAM; coherence bus 48 LUTs |
-| **Correctness** | 1,100/1,100 randomized simulations, 26/27 injected bugs caught, 72/73 ISA tests, 288/288 benchmark runs valid; board = simulation |
+| **Memory** | CA frees every removed node immediately: **0** unfreed nodes, vs. 102–202 for epochs and 1,500–3,000 for never freeing |
+| **Throughput** | fastest scheme under high contention: **1.27×** the never-freeing baseline on a stack (epochs 1.03×, hazard pointers 0.99×), and ahead of epochs on the hash table (0.99 vs 0.91); epochs stay fastest on read-heavy work |
+| **Failure check** | `cread` 2 cycles (plain load 1); `cread` + check: 7 with the CSR, 5 with the fast check, **4 with `bcafail`** |
+| **Coherence cost** | with the L2: read miss 33 cycles, miss to a line the other core holds dirty 32, handoff between cores 59 (without it: 54, 97, 151) |
+| **Area** | CA unit ~1,000 LUTs per core, no memory blocks; `bcafail` 17 LUTs; directory 676 LUTs; shared L2 18.5K LUTs; whole design 67% of the FPGA |
+| **Correctness** | 1,500/1,500 randomized two-cache simulations, 26/27 injected bugs caught, 200/200 L2 tests, 72/73 ISA tests, 1,800/1,800 benchmark runs valid; the simulation matches the board cycle for cycle |
+| **vs. the paper** | at 2 threads close on the list and hash table; on the stack CA does better than in the paper. The paper's large wins appear at 16–32 threads, which 2 cores cannot test |
 
 Details: [docs/06_results.md](docs/06_results.md).
 
-**What's next:** the 🙋 ideas in [PLAN.md](PLAN.md#stretch--ideas); the most valuable is a branch-on-CA-failure instruction, which would remove most of CA's read-side cost.
+**What's next:** the 🙋 ideas in [PLAN.md](PLAN.md#stretch--ideas); the most interesting are more cores and making CA work under an operating system.
 
-**Open questions:** whether CA state should survive interrupts and context switches, and snooping vs. directory for 4+ cores. Details live in [PLAN.md](PLAN.md).
+**Open questions:** whether CA state should survive interrupts and context switches, and how CA behaves with 4 or more cores. Details live in [PLAN.md](PLAN.md).
 
 ## How to join
 1. Read this README, then skim [LOG.md](LOG.md) to see how we got here.
@@ -81,22 +84,22 @@ Details: [docs/06_results.md](docs/06_results.md).
 |---|---|---|
 | 0 | [Getting started](docs/00_getting_started.md) | install the tools and do a first run |
 | 1 | [Background](docs/01_background.md) | understand the problem and Conditional Access |
-| 2 | [Hardware design](docs/02_design.md) | understand MSI, the bus, the CA unit |
+| 2 | [Hardware design](docs/02_design.md) | understand MSI, the directory, the CA unit, `bcafail` and the L2 |
 | 3 | [Simulation](docs/03_simulation.md) | verify everything without a board |
 | 4 | [FPGA (KR260)](docs/04_fpga_kr260.md) | build the bitstream and run on the board |
 | 5 | [Benchmarks](docs/05_benchmarks.md) | rerun the paper's evaluation |
 | 6 | [Results](docs/06_results.md) | see what we measured |
 | 7 | [Challenges](docs/07_challenges.md) | learn from our mistakes and decisions |
-| 8 | [In depth](docs/08_in_depth.md) | the full technical explanation, and answers to reviewers' questions |
+| 8 | [In depth](docs/08_in_depth.md) | follow one idea through the whole system |
 | – | [Code map](docs/code_map.md) | find every file we changed in CVA6 |
 
 ## Repository layout
 | Path | What |
 |---|---|
 | `cva6/` | **submodule**: our CVA6 fork ([AceAryan/cva6](https://github.com/AceAryan/cva6), branch `ca-snoop`) with all RTL, tests, FPGA scripts and benchmarks |
-| `docs/` | the guides above, the poster (`talks/`) and demos |
+| `docs/` | the guides above, the poster (`talks/`, A1 and A0) and demos |
 | `prebuilt/` | the KR260 bitstream and hardware platform, with Vivado reports |
-| `results/` | raw board output of all measurements, decoded tables and charts |
+| `results/` | raw board and simulation output of all measurements, decoded tables and charts ([index](results/README.md)) |
 | `PLAN.md` | what was done, and open tasks for newcomers (🙋) |
 | `LOG.md` | how we got here: what was tried, what broke, why decisions were made |
 | `project.yml` | metadata for the Turing House dashboard |
